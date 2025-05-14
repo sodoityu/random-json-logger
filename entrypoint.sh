@@ -7,7 +7,7 @@ do
    instruction=$(shuf -i 0-4 -n 1)
    d=`date -Iseconds`
    case "$instruction" in
-      "1") echo "{\"@timestamp\": \"$d\", \"level\": \"ERROR\", \"message\": \"something happened in this execution.\"}"
+      "1") echo {\"level\":\"info\",\"ts\":\"2025-05-14T11:21:37.353Z\",\"logger\":\"controllers.GatewayCluster\",\"msg\":\"Cluster Status\",\"gatewaycluster"\":{\"name\":\"gwv6\",\"namespace\":\"reg-bkapi0-001\"},\"Condition:\":\"DeploymentReady\"}"
       ;;
       "2") echo "{\"@timestamp\": \"$d\", \"level\": \"INFO\", \"message\": \"takes the value and converts it to string.\"}"
       ;;
