@@ -31,7 +31,7 @@ RUN curl -fL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp
 # -----------------------------
 ENV ROSA_VERSION=1.2.60
 
-RUN curl -fL https://mirror.openshift.com/pub/cgw/rosa/latest/rosa-linux.tar.gz \
+RUN curl -fL https://mirror.openshift.com/pub/openshift-v4/clients/rosa/latest/rosa-linux.tar.gz \
     -o /tmp/rosa.tar.gz \
     && tar -tzf /tmp/rosa.tar.gz > /dev/null \
     && mkdir -p /usr/local/bin \
