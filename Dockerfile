@@ -14,7 +14,7 @@ RUN microdnf install -y \
     && microdnf clean all
 
 # -----------------------------
-# Disable AWS pager (avoid less error)
+# Disable AWS pager
 # -----------------------------
 ENV AWS_PAGER=""
 
@@ -27,14 +27,17 @@ RUN curl -fL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp
     && rm -rf /tmp/aws /tmp/awscliv2.zip
 
 # -----------------------------
-# Install ROSA CLI (pin version)
+# Install ROSA CLI (official tarball)
 # -----------------------------
 ENV ROSA_VERSION=1.2.60
 
-RUN mkdir -p /usr/local/bin \
-    && curl -fL https://mirror.openshift.com/pub/cgw/rosa/latest/rosa-linux.tar.gz \
-       -o /usr/local/bin/rosa \
-    && chmod +x /usr/local/bin/rosa
+RUN curl -fL https://mirror.openshift.com/pub/cgw/rosa/latest/rosa-linux.tar.gz \
+    -o /tmp/rosa.tar.gz \
+    && tar -tzf /tmp/rosa.tar.gz > /dev/null \
+    && mkdir -p /usr/local/bin \
+    && tar -xzf /tmp/rosa.tar.gz -C /usr/local/bin \
+    && chmod +x /usr/local/bin/rosa \
+    && rm -f /tmp/rosa.tar.gz
 
 # -----------------------------
 # Fix OpenShift random UID compatibility
@@ -51,3 +54,4 @@ RUN chmod +x /entrypoint.sh \
     && chmod g=u /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
+
