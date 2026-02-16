@@ -8,6 +8,7 @@ RUN microdnf install -y \
     jq \
     unzip \
     tar \
+    gzip \
     bash \
     ca-certificates \
     shadow-utils \
